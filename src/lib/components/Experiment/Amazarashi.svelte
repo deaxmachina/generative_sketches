@@ -1,7 +1,7 @@
 <script>
   import { onMount, afterUpdate } from 'svelte'
   import * as THREE from 'three'
-  import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls'
+  import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
   import fragmentShader from './shaders/amazarashiFragment.glsl'
   import vertexShader from './shaders/vertex.glsl'
   import glslify from 'glslify'

@@ -1,7 +1,7 @@
 <script>
   import { onMount, afterUpdate } from 'svelte'
   import * as THREE from 'three'
-  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
   import * as dat from 'lil-gui'
   import { createNoise2D } from 'simplex-noise';
 

@@ -1,7 +1,7 @@
 <script>
   import { onMount, afterUpdate } from 'svelte'
   import * as THREE from 'three'
-  import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls'
+  import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
 
   export let colour = 'rgb(100, 70, 200)'
   let canvas
