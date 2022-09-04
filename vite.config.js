@@ -5,7 +5,7 @@ import glsl from 'vite-plugin-glsl';
 const config = {
 	plugins: [sveltekit(), glsl.default()],
 	ssr: {
-		noExternal: ['d3', 'd3-appendselect', 'hex-rgb'],
+		noExternal: ['d3', 'd3-appendselect', 'hex-rgb', 'three'],
 	},
 	optimizeDeps: {
 		exclude: [],
