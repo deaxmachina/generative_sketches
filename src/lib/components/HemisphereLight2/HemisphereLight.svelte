@@ -11,8 +11,8 @@
   import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js'
   import { GammaCorrectionShader } from 'three/examples/jsm/shaders/GammaCorrectionShader.js'
   import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
-  import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass'
-  import { MaskPass } from 'three/examples/jsm/postprocessing/MaskPass'
+  import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js'
+  import { MaskPass } from 'three/examples/jsm/postprocessing/MaskPass.js'
   import { PixelShader } from 'three/examples/jsm/shaders/PixelShader.js'
 
   import * as dat from 'lil-gui'
