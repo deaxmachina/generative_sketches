@@ -1,0 +1,32 @@
+{
+	"name": "generative-feelings",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"package": "svelte-kit package",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"svelte": "^3.44.0",
+		"vite": "^2.9.13",
+		"vite-plugin-glsl": "^0.2.2"
+	},
+	"type": "module",
+	"dependencies": {
+		"@lukeed/uuid": "^2.0.0",
+		"@sveltejs/adapter-netlify": "^1.0.0-next.68",
+		"canvas-sketch-util": "^1.10.0",
+		"glsl-noise": "^0.0.0",
+		"glslify": "^7.1.1",
+		"lil-gui": "^0.17.0",
+		"lodash": "^4.17.21",
+		"sass": "^1.53.0",
+		"simplex-noise": "^4.0.0",
+		"svelte-preprocess": "^4.10.7",
+		"three": "^0.142.0"
+	}
+}

@@ -1,0 +1,119 @@
+@import 'colors.scss';
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Oxanium:wght@200;300;400;500&family=Rubik+Maze&family=Seaweed+Script&family=VT323&display=swap');
+
+body {
+  background-color: $light-color;
+}
+
+body, * {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+  box-sizing: border-box;
+}
+
+.bg {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  background: rgb(255, 253, 247) url('http://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
+  background-repeat: repeat;
+  animation: bg-animation .9s infinite;
+  opacity: .5;
+  visibility: visible;
+}
+@keyframes bg-animation {
+    0% { transform: translate(0,0) }
+    10% { transform: translate(-5%,0) }
+    20% { transform: translate(-10%,0) }
+    30% { transform: translate(5%,0) }
+    40% { transform: translate(-5%,0) }
+    50% { transform: translate(-10%,0) }
+    60% { transform: translate(15%,0) }
+    70% { transform: translate(0,0) }
+    80% { transform: translate(-15%,0) }
+    90% { transform: translate(10%,0) }
+    100% { transform: translate(5%,0) }
+}
+
+// Mixins 
+$accent-col: #000000;
+$mobile-breakpoint: 1000px;
+
+@mixin flexbox-layout-sketch {
+  position: relative;
+  width: 100%;
+  padding: 5rem 3rem 5rem 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 100vh;
+  @media (max-width: $mobile-breakpoint) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 0 auto;
+      text-align: center;
+      width: 100%;
+      padding: 0;
+      padding-top: 5rem;
+      min-height: 20vh;
+  }
+}
+
+@mixin flexbox-layout-textbox {
+  width: 30%;
+  flex: 0 1 300px;
+  color: $accent-col;
+  text-align: center;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  @media (max-width: $mobile-breakpoint) {
+    flex: 0 1;
+    width: 300px;
+    padding: 0;
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
+}
+
+@mixin sketch-title {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-family: 'Oxanium', cursive;
+  font-weight: 200;
+  letter-spacing: 6px;
+  transition: all 0.2s ease;
+}
+
+@mixin regenerate-btn {
+  margin: 10px auto;
+  color: #333;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 2px;
+  background: #fafafa;
+  transition: all 0.6s ease;
+  cursor: crosshair;
+  border: 0.5px dashed #fafafa;
+  &:hover {
+    border: 0.5px dashed $accent-col;
+    background: white;
+  }
+}
+
+@mixin sketch-container {
+  width: 70%; // This is needed as the flex shrink doens't seem to work
+  z-index: 2;
+  margin-bottom: 2rem;
+  @media (max-width: $mobile-breakpoint) {
+    width: 100%;
+    padding: 0 1rem;
+  }
+}
