@@ -1,5 +1,5 @@
 <script>
-    import Amazarashi from '../../lib/components/Experiment/Amazarashi.svelte'
+    import Amazarashi from '../../lib/components/Generations/Amazarashi.svelte'
 </script>
 
 <Amazarashi />

@@ -1,8 +1,8 @@
 <script>
   import { onMount, afterUpdate } from 'svelte'
   import * as THREE from 'three'
-  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-  import { RectAreaLightHelper }  from 'three/examples/jsm/helpers/RectAreaLightHelper.js'
+  import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
+  import { base } from '$app/paths';
   import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
   import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
   import { DotScreenPass } from 'three/examples/jsm/postprocessing/DotScreenPass.js'
@@ -12,14 +12,11 @@
   import { GammaCorrectionShader } from 'three/examples/jsm/shaders/GammaCorrectionShader.js'
   import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
   import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js'
-  import { MaskPass } from 'three/examples/jsm/postprocessing/MaskPass.js'
-  import { PixelShader } from 'three/examples/jsm/shaders/PixelShader.js'
 
-  import * as dat from 'lil-gui'
-  import { createNoise2D } from 'simplex-noise';
-
-  let canvas 
-  export let noise2D = createNoise2D()
+  let colour = '#f72585'//'rgb(100, 70, 200)'
+  let backgroundColour = '#5ca4a9'
+  let geometryType = 'BoxGeometry'
+  let canvas
 
   // Sizes 
   let widthContainer
@@ -27,27 +24,31 @@
   let windowWidth
   
   $: width = widthContainer
-  $: height = windowWidth > 1000 ? widthContainer * 0.9 : widthContainer * 1
+  $: height = windowWidth > 1000 ? widthContainer * 0.9 : widthContainer * 1.1
   $: aspect = width / height
 
-  // Instantiate 
-  let scene
-  let material
-  let planeGeometry
-  let plane
-  const numMeshes = 200
-  let geometry
+  // Instantiations 
+  let scene = undefined
+  let material = undefined
+  let geometry = undefined
+  let mesh = undefined
   let meshes = []
-  let ambientLight
-  let directionalLight
-  let pointLight
-  let hemisphereLight
-  let camera
-  const cameraZoom = 1.4
-  let controls
-  let renderer
-  let clock
-
+  let camera = undefined 
+  let controls = undefined
+  let renderer = undefined
+  let clock = undefined
+  let ambientLight = undefined
+  let directionalLight = undefined
+  let geometryTypes = {}
+  const cameraZoom = 3
+  // Texture 
+  const textureUrl = `${base}/images/mj3.png`
+  let textureLoader
+  let texture
+  let materialWall = undefined 
+  let geometryWall = undefined
+  let meshWall = undefined
+  // Effects 
   let effectComposer
   let renderPass
   let dotScreenPass
@@ -57,71 +58,79 @@
   let gammaCorrectionShader
   let unrealBloomPass
   let smaaPass
-  let pixelShader
-  let maskPass
+
 
   onMount(() => {
-    // Manually set sizes on mount as the width and height vars are 
-    // not available yet
-    const wrapper = document.getElementById('hemi-light-wrapper')
+    geometryTypes = {
+      'IcosahedronGeometry': new THREE.IcosahedronGeometry(0.2, 10),
+      'ConeGeometry': new THREE.ConeGeometry( 0.2, 0.8, 40, 30 ),
+      'BoxGeometry': new THREE.BoxGeometry( 0.5, 0.5, 0.5, 30, 30, 30 ),
+      'CircleGeometry': new THREE.CircleGeometry( 0.2, 32 ),
+    }
+    // Manually set sizes on mount as the width and height vars are not available yet
+    const wrapper = document.getElementById('simple-cube-wrapper')
     const { width:widthContainer } = wrapper.getBoundingClientRect()
     const width = widthContainer
-    const height = windowWidth > 1000 ? widthContainer * 0.9 : widthContainer * 1
+    const height = windowWidth > 1000 ? widthContainer * 0.9 : widthContainer * 1.1
     const aspect = width / height
-
+      
     // Scene 
     scene = new THREE.Scene()
 
     /************************************
     ************** Objects **************
     ************************************/
-    material = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#fff'),
-      roughness: 1,
-      metalness: 0.1
+    // Material - try Basic or Points
+    material = new THREE.PointsMaterial({
+        color: new THREE.Color(colour),
+        size: 0.02,
+        sizeAttenuation: true,
+        transparent: true,
+        depthWrite: false,
     })
 
-    planeGeometry = new THREE.PlaneGeometry(13, 13)
-    plane = new THREE.Mesh(planeGeometry, material)
-    plane.rotation.x = - Math.PI * 0.5 
-    plane.position.y = -1.2
-    scene.add(plane)
+    // Geometry
+    geometry = geometryTypes[geometryType] //THREE.ConeGeometry( 0.5, 2, 4 )
 
-    // A collection of objects 
-    geometry = new THREE.BoxGeometry(1, 1, 1)
-    for (let i = 0; i < numMeshes; i ++) {
-      const mesh = new THREE.Mesh(geometry, material)
+    // Meshes - either Mesh for MeshBasicMaterial or Points for PointMaterial
+    const numMeshes = 100 
+    for (let i = 0; i < numMeshes; i++) {
+      const mesh = new THREE.Points(geometry, material) // THREE.Mesh(geometry, material) 
+      const scale = Math.random()
+      mesh.scale.set(scale, scale, scale)
       mesh.position.set(
-        noise2D(i, i*2), noise2D(i, i*3), noise2D(i, i*5)
-      )
-      mesh.scale.set(noise2D(i, i*Math.random()), noise2D(i, i*Math.random()), noise2D(i, i*Math.random()))
-      scene.add(mesh)
+        (0.5 - Math.random()) * 5, 
+        (0.5 - Math.random()) * 2 + 1, 
+        (0.5 - Math.random()) * 1, 
+        )
       meshes.push(mesh)
+      scene.add(mesh)
     }
+
+    // Wall 
+    textureLoader = new THREE.TextureLoader()
+    texture = textureLoader.load(textureUrl)
+    materialWall = new THREE.MeshStandardMaterial({
+      //color: new THREE.Color('red'),
+      map: texture,
+      side: THREE.DoubleSide
+    })
+    geometryWall = new THREE.PlaneGeometry(7, 5.5)
+    meshWall = new THREE.Mesh(geometryWall, materialWall)
+    meshWall.position.z = -1.25
+    meshWall.position.y = -1
+    scene.add(meshWall)
 
     /************************************
     ************** Lights ***************
     ************************************/
     // Ambient light 
-    ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
-    //scene.add(ambientLight)
-
+    ambientLight = new THREE.AmbientLight(0xffffff, 0.2)
+    scene.add(ambientLight)
     // Directional light 
-    directionalLight = new THREE.DirectionalLight('#175676', 0.8)
-    directionalLight.position.set(1, 0.25, 0)
+    directionalLight = new THREE.DirectionalLight(0xffffff, 0.8)
+    directionalLight.position.set(0, 0, 1)
     scene.add(directionalLight)
-
-    // Point light 
-    pointLight = new THREE.PointLight('#252422', 0.8, 3)
-    pointLight.position.set(1, -0.4, 1)
-    scene.add(pointLight)
-    const pointLightUp = new THREE.PointLight('#7b1e7a', 0.4, 3)
-    pointLightUp.position.set(0, 1, 2)
-
-    // Hemisphere light
-    hemisphereLight = new THREE.HemisphereLight('#3a86ff', '#ff006e', 0.9)
-    hemisphereLight.position.set(0.6, -1, 0.2)
-    scene.add(hemisphereLight)
 
 
     /************************************
@@ -137,22 +146,19 @@
     camera.far = 100
     // Set position and look at world center 
     camera.position.set(cameraZoom, cameraZoom, cameraZoom)
-    camera.lookAt(new THREE.Vector3())
-    // Update the camera 
-    camera.updateProjectionMatrix()
+    camera.position.x = 0
+    camera.position.y = 3
 
     // Controls 
-    controls = new OrbitControls(camera, canvas)
+    controls = new TrackballControls(camera, canvas)
     controls.enableDamping = true
 
-
-    /************************************
-    ************* Renderer **************
-    ************************************/
-    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true })
+    // Renderer 
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true })
     renderer.setSize(width, height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.setClearColor( '#fff', 1 )
+    //renderer.setClearColor(backgroundColour)
+    //renderer.render(scene, camera)
 
     /************************************
     *********** Post-processing *********
@@ -182,20 +188,24 @@
     // Glitch Pass 
     glitchPass = new GlitchPass(scene, camera)
     glitchPass.enabled = false
+    glitchPass.uniforms[ 'byp' ].value = 10
+    glitchPass.uniforms[ 'amount' ].value = 0.001;
     effectComposer.addPass(glitchPass)
     // RGB Shift Pass 
     rgbShiftShader = new ShaderPass(RGBShiftShader)
+    rgbShiftShader.enabled = true
     effectComposer.addPass(rgbShiftShader)
     // Unreal Bloom Pass
     unrealBloomPass = new UnrealBloomPass()
     unrealBloomPass.strength = 0.7
     unrealBloomPass.radius = 1
-    unrealBloomPass.threshold = 0.6
+    unrealBloomPass.threshold = 0.7
     unrealBloomPass.enabled = true
     effectComposer.addPass(unrealBloomPass)
     // Gamma Correction for the colour
     gammaCorrectionShader = new ShaderPass(GammaCorrectionShader)
-    //effectComposer.addPass(gammaCorrectionShader)
+    gammaCorrectionShader.enabled = false
+    effectComposer.addPass(gammaCorrectionShader)
 
     if (renderer.getPixelRatio() === 1 && !renderer.capabilities.isWebGL2) {
       smaaPass = new SMAAPass()
@@ -207,39 +217,26 @@
     ********** Functionality ************
     ************************************/
     // Animate 
+    let id
     clock = new THREE.Clock()
-    let uTime = 0
-    let id 
-      
     const tick = () => {
       const elapsedTime = clock.getElapsedTime()
-
-      // Move the meshes 
-      meshes.forEach(mesh => {
-        //mesh.position.x += (0.5 - Math.sin(elapsedTime)) * (0.5 - Math.random())* 0.001
-        //mesh.position.z += Math.cos(elapsedTime) * (0.5 - Math.random())* 0.003
-      })
-
-      // Update the material, light
-      uTime = elapsedTime
-      // Move the point light in a circle
-      const spread = 1.5
-      const speed = 1
-      pointLight.position.z = Math.cos(uTime*speed)*spread
-      pointLight.position.x = Math.sin(uTime*speed)*spread
-
+      // Update the material, e.g. the uniforms 
+      meshes.forEach((mesh, i) => mesh.rotation.y = i%2 === 0 ? Math.sin(elapsedTime) : -Math.sin(elapsedTime))
+      
       // Update the controls 
       controls.update()
 
-      // Render with the effect composer
+      // Render 
       //renderer.render(scene, camera)
       effectComposer.render()
 
       // Call tick function again on the next frame 
       id = window.requestAnimationFrame(tick)
-      }
-    tick()
-    return () => {
+   }
+   tick()
+
+   return () => {
       window.cancelAnimationFrame(id);// Stop the animation
       scene = null;
       camera = null;
@@ -248,57 +245,75 @@
     }
   })
 
-  // Update camera based on aspect i.e. width and height 
-  $: if (camera && aspect) {
+  // Update for resize 
+  // Option 1 - from reactive statements
+  $: if (aspect && camera) {
     camera.aspect = aspect
     camera.left = -cameraZoom * aspect 
     camera.right = cameraZoom * aspect 
     camera.updateProjectionMatrix() 
   }
-
-  // Update the render based on size i.e. width and height
-  // Render using the effect composer 
   $: if (renderer && scene && camera && width && height) {
     renderer.setSize(width, height)
     renderer.setPixelRatio(Math.min(2, window.devicePixelRatio))
-    // renderer.render(scene, camera) -- no 
+    //renderer.render(scene, camera)
     effectComposer.setSize(width, height)
     effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     effectComposer.render()
   }
-
-  // Update the cube arrangement (passed in prop)
-  $: if (meshes, geometry, material) {
-    const meshesNew = []
-    meshes.forEach((mesh, i) => {
-      mesh.position.set(
-        noise2D(i, i*2), noise2D(i, i*3), noise2D(i, i*5)
-      )
-      mesh.scale.set(noise2D(i, i*Math.random()), noise2D(i, i*Math.random()), noise2D(i, i*Math.random()))
-      meshesNew.push(mesh)
-      meshes = meshesNew
-    })
+  // Update the colour 
+  $: if (material) {
+    material.color = new THREE.Color(colour)
   }
-
+  // Update the geometry type 
+  $: if (geometry && meshes) {
+    geometry = geometryTypes[geometryType] 
+    meshes.forEach(mesh => mesh.geometry = geometry)
+  }
+  // Update the background colour
+  $: if (renderer) {
+    renderer.render(scene, camera)
+  }
 
 </script>
 
-
 <svelte:window bind:innerWidth={windowWidth}/>
 
-<div class='wrapper' id='hemi-light-wrapper' bind:clientWidth="{widthContainer}" bind:clientHeight="{heightContainer}">
-  <canvas bind:this={canvas}></canvas>
+<div class='wrapper'>
+  <div id='simple-cube-wrapper' bind:clientWidth="{widthContainer}" bind:clientHeight="{heightContainer}">
+    <canvas bind:this={canvas}></canvas>
+  </div>
 </div>
 
 
 <style lang='scss'>
-  #hemi-light-wrapper {
+  .wrapper {
+    min-height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
+  #simple-cube-wrapper {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+  }
+  // #simple-cube-wrapper::before {
+  //   content: "";
+  //   position: absolute;
+  //   top: 5%; left: 5%;
+  //   width: 90%; height: 90%;
+  //   filter: brightness(0.8) hue-rotate(350deg) saturate(2) blur(0px) contrast(0.6);
+  //   background-image: url('https://mj-gallery.com/ec057a68-17d0-4b58-8cc6-f56fb0e188e7/grid_0.png');
+  //   background-size: cover;  
+  //   background-repeat: no-repeat; 
+  //   background-size: 100%;
+  //   background-position: center center;
+  //   opacity: 1;
+  // }
   canvas {
+    position: relative;
     width: 100%;
     box-sizing: border-box;
     box-shadow: 2px 2px 10px rgba(119, 108, 116, 0.808);

@@ -1,5 +1,5 @@
 <script>
-    import OrbWithShader from '../../lib/components/Experiment/OrbWithShader.svelte'
+    import OrbWithShader from '../../lib/components/Generations/OrbWithShader.svelte'
 </script>
 
 <OrbWithShader />
