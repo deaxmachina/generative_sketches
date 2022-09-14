@@ -6,7 +6,7 @@
 
 
 <div class='wrapper'>
-    <div class='side-menu-wrapper'><SideMenu {sketchesData} sketchType={'sketches'} /></div>
+    <div class='side-menu-wrapper'><SideMenu {sketchesData} sketchType={'generations'}  /></div>
     <div class='main-content-wrapper'><slot></slot></div>
 </div>
 

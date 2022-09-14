@@ -1,15 +1,16 @@
 <script>
     import { base } from '$app/paths';
     import { selectedWork } from '../../stores'
-    import sketchesData from '../../../routes/sketches/sketchesData'
 
     const greyscaleHoverVal = 0.6
+    export let sketchesData
+    export let sketchType
 </script>
 
 <section class='menu-container'>
     <div class='menu-main-container'>
             {#each sketchesData as image}
-                <a href='{base}/sketches/{image.key}' class='image-container' on:click={() => { selectedWork.set(image.key) }}>
+                <a href='{base}/{sketchType}/{image.key}' class='image-container' on:click={() => { selectedWork.set(image.key) }}>
                     <img 
                         src={image.url} 
                         alt='stuff'
