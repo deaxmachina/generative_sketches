@@ -13,10 +13,10 @@ const sketchesData = [
         key: 'light01',
         url: `${base}/images/light01.png`
      },
-     {
-        key: 'light02',
-        url: `${base}/images/light02.png`
-     },
+    //  {
+    //     key: 'light02',
+    //     url: `${base}/images/light02.png`
+    //  },
     {
        key: 'structured01',
        url: `${base}/images/structured01.png`

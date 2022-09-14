@@ -7,22 +7,23 @@
   let hoverSketches = false
   let hoverGenerations = false
 
-  let colSketches = '#212529'//'#6a3453'
-  let colGenerations = '#212529' //'#339d81'
+  let colSketches = '#000'//'#6a3453'
+  let colGenerations = '#000' //'#339d81'
 
   const generationUrls = [
-    'https://mj-gallery.com/991215f3-4359-488a-8e0b-ebc4ca40d9ce/grid_0.png',
-    'https://mj-gallery.com/ea93b2b4-f9a1-4aac-9f7d-12703b378a5d/grid_0.png',
     'https://mj-gallery.com/a29e1abe-df25-42de-845e-c6d0ec775128/grid_0.png',
-    'https://mj-gallery.com/462c3a16-4528-4664-bf1f-996c9f13e932/grid_0.png',
-    'https://mj-gallery.com/96ed8365-8e78-4f46-a830-52216bfe7253/grid_0.png',
+    'https://mj-gallery.com/1a22de9f-a52e-4ff2-8189-cb4ffd4d8f0b/grid_0.png',
+    'https://mj-gallery.com/1a22de9f-a52e-4ff2-8189-cb4ffd4d8f0b/grid_0.png',
+    'https://mj-gallery.com/b304368a-7412-4ca9-b5b6-4fbb0561aedf/grid_0.png',
+    'https://mj-gallery.com/4aa0c0aa-063b-41a0-81de-0078b6de66b7/grid_0.png',
     'https://mj-gallery.com/5b746a7b-e9a9-48d2-8f77-0cd27c3a9679/grid_0.png',
     'https://mj-gallery.com/4d2106de-0d2d-4b75-b5bf-db874881c787/grid_0.png',
     'https://mj-gallery.com/fa6c122d-e233-47eb-be6a-ab05da20becf/grid_0.png',
-    'https://mj-gallery.com/ea93b2b4-f9a1-4aac-9f7d-12703b378a5d/grid_0.png',
+    'https://mj-gallery.com/4a98ba87-2cbf-4026-9808-9ee41b1e62ee/grid_0.png',
     'https://mj-gallery.com/e0f13ff6-4ce1-46b2-8ef1-3e72bbe0eb2e/grid_0.png',
-    'https://media.discordapp.net/attachments/996046569709244577/1010564728441020516/Dea_beautiful_kimono_8527bde4-a5c2-4d75-b585-0fa36bf4be54.png',
-    'https://media.discordapp.net/attachments/996046569709244577/1010564443387744357/Dea_beautiful_kimono_39bf237e-5baf-4c73-a132-89a3f30a3eaf.png'
+    //'https://mj-gallery.com/b7c9dace-3235-4406-b2af-e9e6bfb90a2d/grid_0.png',
+    'https://mj-gallery.com/0d5baf8b-a80f-4c6d-adc6-eae16c4be3eb/grid_0.png',
+    'https://mj-gallery.com/c2897d8c-b0b9-46c2-baed-5d7ed08d75ff/grid_0.png'
   ]
   let generationUrl = undefined
 
@@ -92,7 +93,7 @@
         width: calc(50% - 2px); 
         height: 100%;
         //filter: brightness(1) hue-rotate(350deg) saturate(2) blur(0px) contrast(0.6);
-        background-image: url('/images/mercurial_4.gif');
+        background-image: url('/images/mercurial01.png');
         background-repeat: no-repeat; 
         background-position: center center;
         background-size: cover; 
@@ -136,15 +137,15 @@
       //padding-left: 20px;
     } 
     h1 {
-      //background-color: #6a3453;
+      //background-color: rgb(0, 0, 0);
       transition: all 0.7s ease;
       padding: 5px;
-      font-size: 1.8rem;
+      font-size: 2rem;
       letter-spacing: 3.3px;
       font-weight: 400;
       color: #fff;
       text-decoration: none;
-      letter-spacing: 2.5px;
+      letter-spacing: 2.3px;
       writing-mode: vertical-rl;
       text-orientation: upright;
       &.generations-title {
@@ -157,7 +158,7 @@
     h1 {
       padding: 1px 8px;
       font-size: 1.4rem;
-      letter-spacing: 2.5px;
+      letter-spacing: 2.3px;
       writing-mode: vertical-rl;
       text-orientation: upright;
     }
