@@ -2,6 +2,7 @@
   import { onMount, afterUpdate } from 'svelte'
   import * as THREE from 'three'
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+  import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js'
   import fragmentShaderPlane from './shaders/fragmentPlane.glsl'
   import vertexShaderPlane from './shaders/vertexPlane.glsl'
   import fragmentShaderSun from './shaders/fragmentSun.glsl'
