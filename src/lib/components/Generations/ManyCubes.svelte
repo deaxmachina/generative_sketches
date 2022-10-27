@@ -54,7 +54,7 @@
   let renderer
   let clock
   // Texture 
-  const textureUrl = `${base}/images/mj7.png`
+  const textureUrl = `${base}/images/optimised/mj7.jpg`
   let textureLoader = undefined
   let texture = undefined 
   let materialWall = undefined 

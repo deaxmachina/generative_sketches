@@ -45,7 +45,7 @@
   let materialWall = undefined 
   let meshWall = undefined
   // Texture 
-  const textureUrl = `${base}/images/mj2.png`
+  const textureUrl = `${base}/images/optimised/mj2.jpg`
   let textureLoader
   let texture
 

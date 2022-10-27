@@ -42,7 +42,7 @@
   let geometryTypes = {}
   const cameraZoom = 3
   // Texture 
-  const textureUrl = `${base}/images/mj3.png`
+  const textureUrl = `${base}/images/optimised/mj3.jpg`
   let textureLoader
   let texture
   let materialWall = undefined 

@@ -42,7 +42,7 @@
   let ambientLight
   let directionalLight
   // Texture 
-  const textureUrl = `${base}/images/mj4.png`
+  const textureUrl = `${base}/images/optimised/mj4.jpg`
   let textureLoader = undefined
   let texture = undefined 
   let materialWall = undefined 
