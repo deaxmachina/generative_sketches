@@ -1,6 +1,6 @@
 <script>
-    import SideMenu from '../../lib/components/SideMenu/index.svelte'
-    import globalCss from '../../lib/styles/global.scss'
+    import SideMenu from '$lib/components/SideMenu/index.svelte'
+    import globalCss from '$lib/styles/global.scss'
     import sketchesData from './sketchesData'
 </script>
 

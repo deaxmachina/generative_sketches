@@ -26,5 +26,5 @@
 {:else if $selectedWork === 'structured02'}
   <HemisphereLight2 />
 {:else}
-  <h1>Other</h1>
+  <h1>This page does not exist... yet</h1>
 {/if}
