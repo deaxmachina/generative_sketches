@@ -1,7 +1,7 @@
 <script>
-    import SideMenu from '../../lib/components/SideMenu/index.svelte'
-    import globalCss from '../../lib/styles/global.scss'
-    import sketchesData from './sketchesData'
+    import SideMenu from '$lib/components/SideMenu/index.svelte'
+    import globalCss from '$lib/styles/global.scss'
+    import sketchesData from './sketchesData.js'
 </script>
 
 
@@ -18,7 +18,7 @@
         margin: 0 auto;
     }
     .side-menu-wrapper {
-        flex: 0 1 300px;
+        flex: 0 1 160px;
     }
     .main-content-wrapper {
         flex: 0 1 1500px;

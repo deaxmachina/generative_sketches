@@ -13,15 +13,8 @@ export const components = [
 	() => import("../../src/routes/generations/orbcity.svelte"),
 	() => import("../../src/routes/generations/pop-city.svelte"),
 	() => import("../../src/routes/index.svelte"),
-	() => import("../../src/routes/sketches/colours01.svelte"),
-	() => import("../../src/routes/sketches/index.svelte"),
-	() => import("../../src/routes/sketches/light01.svelte"),
-	() => import("../../src/routes/sketches/light02.svelte"),
-	() => import("../../src/routes/sketches/mercurial01.svelte"),
-	() => import("../../src/routes/sketches/mercurial02.svelte"),
-	() => import("../../src/routes/sketches/perspective01.svelte"),
-	() => import("../../src/routes/sketches/structured01.svelte"),
-	() => import("../../src/routes/sketches/structured02.svelte")
+	() => import("../../src/routes/sketches/[slug]/index.svelte"),
+	() => import("../../src/routes/sketches/index.svelte")
 ];
 
 export const dictionary = {
@@ -34,12 +27,5 @@ export const dictionary = {
 	"generations/many-cubes": [[0, 2, 8], [1]],
 	"generations/orbcity": [[0, 2, 9], [1]],
 	"generations/pop-city": [[0, 2, 10], [1]],
-	"sketches/colours01": [[0, 3, 12], [1]],
-	"sketches/light01": [[0, 3, 14], [1]],
-	"sketches/light02": [[0, 3, 15], [1]],
-	"sketches/mercurial01": [[0, 3, 16], [1]],
-	"sketches/mercurial02": [[0, 3, 17], [1]],
-	"sketches/perspective01": [[0, 3, 18], [1]],
-	"sketches/structured01": [[0, 3, 19], [1]],
-	"sketches/structured02": [[0, 3, 20], [1]]
+	"sketches/[slug]": [[0, 3, 12], [1]]
 };
