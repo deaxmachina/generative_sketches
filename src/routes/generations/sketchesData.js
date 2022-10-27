@@ -3,23 +3,23 @@ import { base } from '$app/paths';
 const sketchesData = [
     {
         key: 'pop-city',
-        url: `${base}/images/pop-city.png`
+        url: `${base}/images/optimised/pop-city.jpg`
      },
     {
         key: 'city-cubes',
-        url: `${base}/images/city-cubes.png`
+        url: `${base}/images/optimised/city-cubes.jpg`
     },
     {
         key: 'cube-face',
-        url: `${base}/images/cube-face.png`
+        url: `${base}/images/optimised/cube-face.jpg`
      },
      {
         key: 'many-cubes',
-        url: `${base}/images/many-cubes.png`
+        url: `${base}/images/optimised/many-cubes.jpg`
      },
     {
         key: 'amazarashi',
-        url: `${base}/images/amazarashi.png`
+        url: `${base}/images/optimised/amazarashi.jpg`
     },
 ]
 
