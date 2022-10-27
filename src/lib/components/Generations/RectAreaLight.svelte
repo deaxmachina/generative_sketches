@@ -144,6 +144,7 @@
     // Controls 
     controls = new OrbitControls(camera, canvas)
     controls.enableDamping = true
+    controls.enabled = false
 
     /************************************
     ************* Renderer **************
@@ -234,13 +235,15 @@
 
 <svelte:window bind:innerWidth={windowWidth}/>
 
-<button on:click={() => { 
-  rectLightIntensity = _.random(1, 10) 
-  rectLightWidth = _.random(1, 6) 
-  rectLightHeight = _.random(1, 6) 
-  noise2D = createNoise2D()
-  }}>re-generate</button>
-<div class=wrapper>
+<div 
+  class='wrapper' 
+  on:click={() => { 
+    rectLightIntensity = _.random(1, 10) 
+    rectLightWidth = _.random(1, 6) 
+    rectLightHeight = _.random(1, 6) 
+    noise2D = createNoise2D()
+  }}
+  >
   <div id='rect-area-wrapper' bind:clientWidth="{widthContainer}" bind:clientHeight="{heightContainer}">
     <canvas bind:this={canvas}></canvas>
   </div>
@@ -254,6 +257,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: crosshair;
+    @media (max-width: 900px) {
+      min-height: 70vh;
+    }
   }
   #rect-area-wrapper {
     width: 100%;

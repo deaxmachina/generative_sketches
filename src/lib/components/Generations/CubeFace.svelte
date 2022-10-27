@@ -239,9 +239,10 @@
 
 </script>
 
-<button on:click={() => useGlitch = !useGlitch}>toggle glitch</button>
-<div class=wrapper>
+
+<div class='wrapper'>
   <div id='birth-city-wrapper' bind:clientWidth="{widthContainer}">
+    <button on:click={() => useGlitch = !useGlitch}>toggle glitch</button>
     <canvas bind:this={canvas}></canvas>
   </div>
 </div>
@@ -253,6 +254,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    @media (max-width: 900px) {
+      min-height: 70vh;
+    }
   }
   #birth-city-wrapper {
     width: 100%;
@@ -267,12 +272,14 @@
   }
   button {
     position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-    border: 1px dashed #2b207a;
-    border-top: none;
-    color:#2b207a;
+    z-index: 100;
+    top: 2px;
+    left: 2px;
+    //transform: translate(-50%, 0);
+    border: 1px dashed #d69d0d;
+    //border-top: none;
+    color:#d69d0d;
+    font-weight: bold;
     background: none;
     padding: 1rem; 
     cursor: crosshair;

@@ -89,6 +89,7 @@
     // Controls 
     controls = new OrbitControls(camera, canvas)
     controls.enableDamping = true
+    controls.enabled = false
 
 
     /************************************

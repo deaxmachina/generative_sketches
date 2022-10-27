@@ -49,6 +49,15 @@
     const height = width * 1
     const aspect = width / height
 
+    // Add double-click event
+    wrapper.addEventListener('dblclick', () => {
+      if (!document.fullscreenElement) {
+          canvas.requestFullscreen()
+      } else {
+          document.exitFullscreen()
+      }
+    })
+
     // Scene 
     scene = new THREE.Scene()
     //scene.background = new THREE.Color('black')
@@ -117,6 +126,7 @@
     // Controls 
     controls = new OrbitControls(camera, canvas)
     controls.enableDamping = true
+    controls.enabled = false
 
     /************************************
     ************* Renderer **************
@@ -216,6 +226,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: crosshair;
   }
   canvas {
     width: 100%;

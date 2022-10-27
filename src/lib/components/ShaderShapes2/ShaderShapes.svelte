@@ -172,6 +172,7 @@
     // Controls 
     controls = new OrbitControls(camera, canvas)
     controls.enableDamping = true
+    controls.enabled = false
 
 
     /************************************
@@ -255,6 +256,7 @@
     width: 100%;
     height: 100%;
     margin: auto;
+    cursor: crosshair;
   }
   canvas {
     width: 100%;

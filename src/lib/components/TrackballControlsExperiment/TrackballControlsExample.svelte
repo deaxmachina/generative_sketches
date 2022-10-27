@@ -49,6 +49,16 @@
     const width = widthContainer
     const height = windowWidth > 1000 ? widthContainer * 0.8 : widthContainer * 1
     const aspect = width / height
+
+
+    // Add double-click event
+    wrapper.addEventListener('dblclick', () => {
+        if (!document.fullscreenElement) {
+            canvas.requestFullscreen()
+        } else {
+            document.exitFullscreen()
+        }
+    })
       
     // Scene 
     scene = new THREE.Scene()
@@ -105,6 +115,7 @@
     // Controls 
     controls = new TrackballControls(camera, canvas)
     controls.enableDamping = true
+    controls.enabled = false
 
     // Light 
     // Ambient light 
@@ -196,6 +207,7 @@
     width: 100%;
     height: 100%;
     margin: auto;
+    cursor: crosshair;
   }
   canvas {
     width: 100%;

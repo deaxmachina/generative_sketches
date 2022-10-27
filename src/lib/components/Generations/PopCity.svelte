@@ -152,6 +152,7 @@
     // Controls 
     controls = new TrackballControls(camera, canvas)
     controls.enableDamping = true
+    controls.enabled = false
 
     // Renderer 
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true })
@@ -293,6 +294,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 900px) {
+      min-height: 70vh;
+    }
   }
   #simple-cube-wrapper {
     width: 100%;

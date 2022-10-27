@@ -45,15 +45,6 @@ import TrackballControlsExample from '../TrackballControlsExperiment/TrackballCo
     const width = widthContainer
     const height = heightContainer
     const aspect = width / height
-
-    // Full screen on double click and exit full screen on double click again
-    wrapper.addEventListener('dblclick', () => {
-      if (!document.fullscreenElement) {
-        wrapper.requestFullscreen()
-      } else {
-        wrapper.exitFullscreen()
-      }
-    })
       
     // Scene 
     scene = new THREE.Scene()
@@ -101,6 +92,7 @@ import TrackballControlsExample from '../TrackballControlsExperiment/TrackballCo
     // Controls 
     controls = new TrackballControls(camera, canvas)
     controls.enableDamping = true
+    controls.enabled = false
 
     // Renderer 
     renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true })

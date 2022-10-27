@@ -177,6 +177,7 @@
     // Controls 
     controls = new OrbitControls(camera, canvas)
     controls.enableDamping = true
+    controls.enabled = false
 
 
     /************************************
@@ -337,6 +338,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    @media (max-width: 900px) {
+      min-height: 70vh;
+    }
   }
   #many-cubes-wrapper {
     width: 100%;

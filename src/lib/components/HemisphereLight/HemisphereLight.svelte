@@ -45,6 +45,15 @@
     const height = windowWidth > 1000 ? widthContainer * 0.8 : widthContainer * 1.3
     const aspect = width / height
 
+    // Add double-click event
+    wrapper.addEventListener('dblclick', () => {
+      if (!document.fullscreenElement) {
+          canvas.requestFullscreen()
+      } else {
+          document.exitFullscreen()
+      }
+    })
+
     // Scene 
     scene = new THREE.Scene()
 
@@ -120,6 +129,7 @@
     // Controls 
     controls = new OrbitControls(camera, canvas)
     controls.enableDamping = true
+    controls.enabled = false
 
 
     /************************************
@@ -214,6 +224,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: crosshair;
   }
   canvas {
     width: 100%;
