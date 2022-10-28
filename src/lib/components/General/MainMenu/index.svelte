@@ -26,7 +26,7 @@
     //'https://mj-gallery.com/c2897d8c-b0b9-46c2-baed-5d7ed08d75ff/grid_0.png',
     'https://mj-gallery.com/887ac0cd-eacf-45df-810d-174691f28319/grid_0.png',
     'https://mj-gallery.com/1d38d76c-ebaa-4fd4-a245-c243d62e93c5/grid_0.png',
-    'https://mj-gallery.com/1d38d76c-ebaa-4fd4-a245-c243d62e93c5/grid_0.png'
+    
   ]
   let generationUrl = undefined
 
@@ -96,7 +96,7 @@
         width: calc(50% - 2px); 
         height: 100%;
         //filter: brightness(1) hue-rotate(350deg) saturate(2) blur(0px) contrast(0.6);
-        background-image: url('/images/mercurial01.png');
+        background-image: url('/images/mercurial_4.gif');
         background-repeat: no-repeat; 
         background-position: center center;
         background-size: cover; 

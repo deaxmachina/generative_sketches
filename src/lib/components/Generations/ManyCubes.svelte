@@ -18,7 +18,6 @@
 
   import * as dat from 'lil-gui'
   import { createNoise2D } from 'simplex-noise';
-  import HemisphereLight from '../HemisphereLight2/HemisphereLight.svelte';
   import { text } from 'svelte/internal';
 
   let canvas 
