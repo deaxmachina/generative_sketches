@@ -96,7 +96,7 @@
         width: calc(50% - 2px); 
         height: 100%;
         //filter: brightness(1) hue-rotate(350deg) saturate(2) blur(0px) contrast(0.6);
-        background-image: url('/images/mercurial_4.gif');
+        background-image: url('/images/mercurial01.png');
         background-repeat: no-repeat; 
         background-position: center center;
         background-size: cover; 
