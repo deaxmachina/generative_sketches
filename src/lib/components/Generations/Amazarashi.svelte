@@ -6,7 +6,6 @@
   import vertexShader from './shaders/vertex.glsl'
   import glslify from 'glslify'
   import _ from 'lodash'
-import TrackballControlsExample from '../TrackballControlsExperiment/TrackballControlsExample.svelte';
 
   const possibleCol1 = ['#ff595e', '#dd2634', '#9e164d', '#31dd87', '#13b79f']
   const possibleCol2 = ['#6a4c93', '#61189b', '#6239d3', '#334dcc', '#ccaf36']

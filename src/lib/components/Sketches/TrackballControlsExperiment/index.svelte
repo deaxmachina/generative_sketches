@@ -28,7 +28,7 @@
 
 
 <style lang='scss'>
-  @import '../../styles/global.scss';
+  @import '../../../styles/global.scss';
   $accent-col: #000000;
 
   .layout {

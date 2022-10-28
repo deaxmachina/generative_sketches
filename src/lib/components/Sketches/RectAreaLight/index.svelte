@@ -12,7 +12,7 @@
 
 <div class='layout'>
   <div class='left'>
-    <h1>Light .02</h1>
+    <h1>Light .01</h1>
     <button on:click={() => { 
       rectLightIntensity = _.random(1, 10) 
       rectLightWidth = _.random(1, 6) 
@@ -29,7 +29,7 @@
 
 
 <style lang='scss'>
-  @import '../../styles/global.scss';
+  @import '../../../styles/global.scss';
   $accent-col: #000000;
 
   .layout {

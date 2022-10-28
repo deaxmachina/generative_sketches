@@ -1,6 +1,6 @@
 <script>
     import { base } from '$app/paths';
-    import { selectedWork } from '../../stores'
+    import { selectedWork } from '$lib/stores'
 
     const greyscaleHoverVal = 0.6
     export let sketchesData

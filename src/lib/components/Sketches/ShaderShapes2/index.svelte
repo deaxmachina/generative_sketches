@@ -1,28 +1,29 @@
 <script>
-  import ShaderColours from './ShaderColours.svelte'
-  const possibleCol1 = ['#ff595e', '#dd2634', '#9e164d', '#31dd87', '#13b79f']
-  const possibleCol2 = ['#6a4c93', '#61189b', '#6239d3', '#334dcc', '#ccaf36']
+  import ShaderColours from './ShaderShapes.svelte'
+  const possibleCol1 = [ '#9e164d', '#ffffff', '#a53860', '#565264', '#706677', '#a6808c', '#d6cfcb', '#07beb8', '#16697a', '#3d5a80']
+  
   let col1 
-  let col2 
+
+  let hillValue
   const setCols = () => {
     col1 = possibleCol1[Math.floor(Math.random()*possibleCol1.length)]
-    col2 = possibleCol2[Math.floor(Math.random()*possibleCol2.length)]
+    hillValue = Math.random()
   }
 </script>
 
 
 <div class='layout'>
   <div class='left'>
-    <h1>Coloured .01</h1>
+    <h1>Mercurial .02</h1>
     <button on:click={setCols}>re-generate</button>
   </div>
   <div class='right'>
-    <ShaderColours {col1} {col2} />
+    <ShaderColours {col1} {hillValue} />
   </div>
 </div>
 
 <style lang='scss'>
-  @import '../../styles/global.scss';
+  @import '../../../styles/global.scss';
   $accent-col: #000000;
 
   .layout {

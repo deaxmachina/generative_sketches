@@ -1,5 +1,5 @@
 <script>
-    import SideMenu from '$lib/components/SideMenu/index.svelte'
+    import SideMenu from '$lib/components/General/SideMenu/index.svelte'
     import globalCss from '$lib/styles/global.scss'
     import sketchesData from './sketchesData.js'
 </script>

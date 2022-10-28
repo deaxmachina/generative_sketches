@@ -1,5 +1,5 @@
 <script>
-  import MainMenu from '$lib/components/MainMenu/index.svelte'
+  import MainMenu from '$lib/components/General/MainMenu/index.svelte'
 </script>
 
 
