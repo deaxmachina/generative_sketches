@@ -1,74 +1,89 @@
 <script>
-  import {onMount} from 'svelte'
-  import { base } from '$app/paths';
-  import '$lib/styles/global.scss';
-  import App from '$lib/App.svelte'
+  import { onMount } from "svelte";
+  import { base } from "$app/paths";
+  import "$lib/styles/global.scss";
+  import App from "$lib/App.svelte";
 
-  let hoverSketches = false
-  let hoverGenerations = false
+  let hoverSketches = false;
+  let hoverGenerations = false;
 
-  let colSketches = '#000'//'#6a3453'
-  let colGenerations = '#000' //'#339d81'
+  let colSketches = "#000"; //'#6a3453'
+  let colGenerations = "#000"; //'#339d81'
 
   const generationUrls = [
-    //'https://mj-gallery.com/a29e1abe-df25-42de-845e-c6d0ec775128/grid_0.png',
-    'https://mj-gallery.com/1a22de9f-a52e-4ff2-8189-cb4ffd4d8f0b/grid_0.png',
-    'https://mj-gallery.com/1a22de9f-a52e-4ff2-8189-cb4ffd4d8f0b/grid_0.png',
-    'https://mj-gallery.com/b304368a-7412-4ca9-b5b6-4fbb0561aedf/grid_0.png',
-    'https://mj-gallery.com/4aa0c0aa-063b-41a0-81de-0078b6de66b7/grid_0.png',
-    'https://mj-gallery.com/5b746a7b-e9a9-48d2-8f77-0cd27c3a9679/grid_0.png',
-    'https://mj-gallery.com/4d2106de-0d2d-4b75-b5bf-db874881c787/grid_0.png',
-    //'https://mj-gallery.com/fa6c122d-e233-47eb-be6a-ab05da20becf/grid_0.png',
-    'https://mj-gallery.com/4a98ba87-2cbf-4026-9808-9ee41b1e62ee/grid_0.png',
-    'https://mj-gallery.com/e0f13ff6-4ce1-46b2-8ef1-3e72bbe0eb2e/grid_0.png',
-    //'https://mj-gallery.com/b7c9dace-3235-4406-b2af-e9e6bfb90a2d/grid_0.png',
-    //'https://mj-gallery.com/0d5baf8b-a80f-4c6d-adc6-eae16c4be3eb/grid_0.png',
-    //'https://mj-gallery.com/c2897d8c-b0b9-46c2-baed-5d7ed08d75ff/grid_0.png',
-    'https://mj-gallery.com/887ac0cd-eacf-45df-810d-174691f28319/grid_0.png',
-    'https://mj-gallery.com/1d38d76c-ebaa-4fd4-a245-c243d62e93c5/grid_0.png',
-    
-  ]
-  let generationUrl = undefined
+    `${base}/images/generations/2.jpg`,
+    `${base}/images/generations/4.jpg`,
+    `${base}/images/generations/5.jpg`,
+    `${base}/images/generations/6.jpg`,
+    `${base}/images/generations/7.jpg`,
+    `${base}/images/generations/8.jpg`,
+    `${base}/images/generations/9.jpg`,
+    `${base}/images/generations/10.jpg`,
+    `${base}/images/generations/11.jpg`,
+    `${base}/images/generations/12.jpg`,
+    `${base}/images/generations/13.jpg`,
+    `${base}/images/generations/14.jpg`,
+    `${base}/images/generations/15.jpg`,
+    `${base}/images/generations/16.jpg`,
+  ];
+  let generationUrl = undefined;
 
   onMount(() => {
-    generationUrl = generationUrls[Math.floor(Math.random()*generationUrls.length)] 
-  })
+    generationUrl =
+      generationUrls[Math.floor(Math.random() * generationUrls.length)];
+  });
 </script>
-
 
 <main>
   <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-  <div class='menu-container'>
+  <div class="menu-container">
     <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-    <a 
-      href='{base}/sketches' 
-      class='menu-item sketches' 
-      on:mouseover={() => { hoverSketches = true }}
-      on:mouseout={() => { hoverSketches = false }}
+    <a
+      href="{base}/sketches"
+      class="menu-item sketches"
+      on:mouseover={() => {
+        hoverSketches = true;
+      }}
+      on:mouseout={() => {
+        hoverSketches = false;
+      }}
     >
-      <div class='inside sketches-inside'>
-        <h1 class='sketches-title' style:background-color={hoverSketches ? colSketches : 'transparent'}>Sketches</h1>
-      </div>   
+      <div class="inside sketches-inside">
+        <h1
+          class="sketches-title"
+          style:background-color={hoverSketches ? colSketches : "transparent"}
+        >
+          Sketches
+        </h1>
+      </div>
     </a>
     <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-    <a 
-      href='{base}/generations' 
-      class='menu-item generations'
-      on:mouseover={() => { hoverGenerations = true }}
-      on:mouseout={() => { hoverGenerations = false }}
+    <a
+      href="{base}/generations"
+      class="menu-item generations"
+      on:mouseover={() => {
+        hoverGenerations = true;
+      }}
+      on:mouseout={() => {
+        hoverGenerations = false;
+      }}
       style={`--url: url(${generationUrl})`}
     >
-      <div class='inside generations-inside'>
-        <h1 class='generations-title' style:background-color={hoverGenerations ? colGenerations : 'transparent'}>Generations</h1>
+      <div class="inside generations-inside">
+        <h1
+          class="generations-title"
+          style:background-color={hoverGenerations
+            ? colGenerations
+            : "transparent"}
+        >
+          Generations
+        </h1>
       </div>
     </a>
   </div>
 </main>
 
-
-
-<style lang='scss'>
-
+<style lang="scss">
   a {
     text-decoration: none;
   }
@@ -92,14 +107,15 @@
       &::before {
         content: "";
         position: absolute;
-        top: 0; left: 0;
-        width: calc(50% - 2px); 
+        top: 0;
+        left: 0;
+        width: calc(50% - 2px);
         height: 100%;
         //filter: brightness(1) hue-rotate(350deg) saturate(2) blur(0px) contrast(0.6);
-        background-image: url('/images/mercurial01.png');
-        background-repeat: no-repeat; 
+        background-image: url("/images/mercurial01.png");
+        background-repeat: no-repeat;
         background-position: center center;
-        background-size: cover; 
+        background-size: cover;
         opacity: 1;
         //background-size: 100%;
       }
@@ -110,15 +126,16 @@
       &::before {
         content: "";
         position: absolute;
-        top: 0; 
+        top: 0;
         left: calc(50% + 2px);
-        width: calc(50% - 2px); 
+        width: calc(50% - 2px);
         height: 100%;
-        filter: brightness(0.7) hue-rotate(350deg) saturate(3) blur(0px) contrast(0.6);
-        background: #461126;
+        // filter: brightness(0.7) hue-rotate(350deg) saturate(3) blur(0px)
+        //   contrast(0.6);
+        background: #bf2361;
         background-image: var(--url);
-        background-size: cover;  
-        background-repeat: no-repeat; 
+        background-size: cover;
+        background-repeat: no-repeat;
         background-position: center;
         opacity: 1;
       }
@@ -139,7 +156,7 @@
     &.generations-inside {
       justify-content: flex-start;
       //padding-left: 20px;
-    } 
+    }
     h1 {
       //background-color: rgb(0, 0, 0);
       transition: all 0.7s ease;
@@ -167,6 +184,4 @@
       text-orientation: upright;
     }
   }
-
-
 </style>
